@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <time.h>
+
 #include "../../Utils/buffer.h"
 
 #define PMU_READINGS_DIGIT_ACCURACY 4 // DO NOT INCREASE THIS BEYOND 8

@@ -5,17 +5,22 @@ double RP5_GetAmpers(char* genc_result) {
     int equal_character_counter = 0;
     int start_index = 0;
 
-    for (start_index = 0; start_index < PMU_GENCMD_BUFFER_SIZE && equal_character_counter < 8; start_index++) {
-        if (genc_result[start_index] == '=') {
+    for (start_index = 0; start_index < PMU_GENCMD_BUFFER_SIZE && equal_character_counter < 8; start_index++)
+    {
+        if (genc_result[start_index] == '=')
+        {
             equal_character_counter++;
         }
     }
 
-    for (int i = start_index; i < start_index + PMU_BUFFER_SIZE + 1; i++) {
-        if (genc_result[i] == '.') {
+    for (int i = start_index; i < start_index + PMU_BUFFER_SIZE + 1; i++)
+    {
+        if (genc_result[i] == '.')
+        {
             ampers[i - start_index] = genc_result[i];
 
-            for (int x = 0; x < PMU_READINGS_DIGIT_ACCURACY; x++) {
+            for (int x = 0; x < PMU_READINGS_DIGIT_ACCURACY; x++)
+            {
                 ampers[i - start_index + x + 1] = genc_result[i + x + 1];
             }
 
@@ -33,17 +38,22 @@ double RP5_GetVoltage(char* genc_result) {
     int equal_character_counter = 0;
     int start_index = 0;
 
-    for (start_index = 0; start_index < PMU_GENCMD_BUFFER_SIZE && equal_character_counter < 20; start_index++) {
-        if (genc_result[start_index] == '=') {
+    for (start_index = 0; start_index < PMU_GENCMD_BUFFER_SIZE && equal_character_counter < 20; start_index++)
+    {
+        if (genc_result[start_index] == '=')
+        {
             equal_character_counter++;
         }
     }
 
-    for (int i = start_index; i < start_index + PMU_BUFFER_SIZE + 1; i++) {
-        if (genc_result[i] == '.') {
+    for (int i = start_index; i < start_index + PMU_BUFFER_SIZE + 1; i++)
+    {
+        if (genc_result[i] == '.')
+        {
             voltage[i - start_index] = genc_result[i];
 
-            for (int x = 0; x < PMU_READINGS_DIGIT_ACCURACY; x++) {
+            for (int x = 0; x < PMU_READINGS_DIGIT_ACCURACY; x++)
+            {
                 voltage[i - start_index + x + 1] = genc_result[i + x + 1];
             }
 
@@ -56,11 +66,13 @@ double RP5_GetVoltage(char* genc_result) {
     return atof(voltage);
 }
 
-void RP5_gencmd(char result[]) {
+void RP5_gencmd(char result[])
+{
     int file_desc = open("/dev/vcio", 0);
     unsigned packet[263];
     
-    if (file_desc < 0) {
+    if (file_desc < 0)
+    {
         printf("Error opening device file\n");
         exit(-1);
     }
@@ -76,7 +88,8 @@ void RP5_gencmd(char result[]) {
 
     memcpy(packet + 6, "pmic_read_adc", 14);
 
-    if (ioctl(file_desc, _IOWR(100, 0, char *), packet) < 0) {
+    if (ioctl(file_desc, _IOWR(100, 0, char *), packet) < 0)
+    {
         printf("ioctl error: %i\n", 0);
         exit(-1);
     } 
@@ -88,7 +101,8 @@ void RP5_gencmd(char result[]) {
 void RP5_TerminalMode() {
     char* gencmd_result = CreateBuffer(PMU_GENCMD_BUFFER_SIZE);
 
-    while (1) {
+    while (1)
+    {
         RP5_gencmd(gencmd_result);
         printf("%fV %fA\n", RP5_GetVoltage(gencmd_result), RP5_GetAmpers(gencmd_result));
         sleep(1);
@@ -108,7 +122,8 @@ void RP5_DaemonMode(const char* filename, int minutes_to_run) {
     // We want to run this in the background only in file mode, terminal mode is meant for testing
     daemon(1, 1);
 
-    for (int i = 0; i < minutes_to_run; i++) {
+    for (int i = 0; i < minutes_to_run; i++)
+    {
         FILE* output_file = fopen(filenameBuffer, "w");
 
         filenameCounter++;
@@ -117,7 +132,8 @@ void RP5_DaemonMode(const char* filename, int minutes_to_run) {
         strcpy(filenameBuffer, filename);
         strcat(filenameBuffer, filenameCounterBuffer);
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 60; i++)
+        {
             RP5_gencmd(gencmd_result);
             fprintf(output_file, "%i %f %f\n", time(NULL), RP5_GetVoltage(gencmd_result), RP5_GetAmpers(gencmd_result));
             sleep(1);

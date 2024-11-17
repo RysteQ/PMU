@@ -1,6 +1,8 @@
 #ifndef bufferh
 #define bufferh
 
+#include <stdlib.h>
+
 /// @brief Dynamically allocated a new buffer
 /// @param size The size of the new buffer
 /// @return The newly made buffer

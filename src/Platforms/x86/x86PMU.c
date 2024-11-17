@@ -77,7 +77,8 @@ double X86_ReadRapl(int cores, int packages)
 	return ((double) after - (double) before) / 1000000;
 }
 
-void X86_TerminalMode() {
+void X86_TerminalMode()
+{
 	CPU_Information cpu_information = X86_GetCpuInformation();
 
 	while (1)
@@ -86,7 +87,8 @@ void X86_TerminalMode() {
     }
 }
 
-void X86_DaemonMode(char* filename, int minutes_to_run) {
+void X86_DaemonMode(char* filename, int minutes_to_run)
+{
 	CPU_Information cpu_information = X86_GetCpuInformation();
     char* filenameBuffer = CreateBuffer(200);
     char* filenameCounterBuffer = CreateBuffer(200);

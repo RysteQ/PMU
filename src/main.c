@@ -8,13 +8,16 @@
 #include "Utils/buffer.h"
 #include "Utils/arguments.h"
 
-int main(int argc, char** argv) {
-    if (ValidateArguments(argc, argv) == false) {
+int main(int argc, char** argv)
+{
+    if (ValidateArguments(argc, argv) == false)
+    {
         InvalidArguments();
         exit(-1);
     }
 
-    if (strcmp(argv[1], "-h") == 0) {
+    if (strcmp(argv[1], "-h") == 0)
+    {
         HelpMenu();
         exit(0);
     }
@@ -24,8 +27,10 @@ int main(int argc, char** argv) {
     char* filename;
     int time = 0;
 
-    if (mode == Terminal) {
-        switch (platform) {
+    if (mode == Terminal)
+    {
+        switch (platform)
+        {
             case RP5:
                 RP5_TerminalMode();
                 break;
@@ -39,11 +44,14 @@ int main(int argc, char** argv) {
                 exit(-1);
                 break;
         }
-    } else {
+    }
+    else
+    {
         filename = GetFilename(argv[3]);
         time = GetRuntime(argv[4]);
 
-        switch (platform) {
+        switch (platform)
+        {
             case RP5:
                 RP5_DaemonMode(filename, time);
                 break;

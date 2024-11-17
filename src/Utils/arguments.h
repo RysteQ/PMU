@@ -9,13 +9,15 @@
 
 #define DAEMON_OUTPUT_FILENAME_LENGTH 1024
 
-typedef enum MODE {
+typedef enum MODE
+{
     Terminal,
     Daemon,
     Mode_NaN
 } MODE;
 
-typedef enum PLATFORM {
+typedef enum PLATFORM
+{
     RP5,
     x86,
     Platforn_NaN
