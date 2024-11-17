@@ -62,7 +62,7 @@ void HelpMenu()
     printf("./pmu [1] [2] [3] [4]\n");
     printf("\t[1] -h: Displays all of the available arguments\n");
     printf("\t[1] -[t or d]: Specifies the mode the application should run at (t: terminal, d: daemon)\n");
-    printf("\t[2] -[rp5 or x86]: Specifies the platform\n");
+    printf("\t[2] -[rpi or x86]: Specifies the platform\n");
     printf("\t[3] -filename: Specifies the filename the task should save the data ar, only available in daemon mode\n");
     printf("\t[4] -number: Specifies the time the task should run for, only available in daemon mode\n");
 
@@ -87,7 +87,7 @@ MODE GetMode(char* first_argument)
 
 PLATFORM GetPlatform(char* second_argument)
 {
-    if (strcmp(second_argument, "-rp5") == 0)
+    if (strcmp(second_argument, "-rpi") == 0)
     {
         return RP5;
     }
