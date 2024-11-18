@@ -135,7 +135,7 @@ void RP5_DaemonMode(const char* filename, int minutes_to_run) {
         for (int i = 0; i < 60; i++)
         {
             RP5_gencmd(gencmd_result);
-            fprintf(output_file, "%i %lf W\n", time(NULL), RP5_GetVoltage(gencmd_result), RP5_GetAmpers(gencmd_result));
+            fprintf(output_file, "%li %lf W\n", time(NULL), RP5_GetVoltage(gencmd_result) * RP5_GetAmpers(gencmd_result));
             sleep(1);
         }
 

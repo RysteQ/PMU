@@ -18,7 +18,7 @@ typedef enum MODE
 
 typedef enum PLATFORM
 {
-    RP5,
+    RPI,
     x86,
     Platforn_NaN
 } PLATFORM;

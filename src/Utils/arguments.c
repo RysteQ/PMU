@@ -89,7 +89,7 @@ PLATFORM GetPlatform(char* second_argument)
 {
     if (strcmp(second_argument, "-rpi") == 0)
     {
-        return RP5;
+        return RPI;
     }
 
     if (strcmp(second_argument, "-x86") == 0)

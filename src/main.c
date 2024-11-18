@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "Platforms/Raspberry Pi 5/RP5PMU.h"
 #include "Platforms/x86/x86PMU.h"
@@ -27,11 +28,21 @@ int main(int argc, char** argv)
     char* filename;
     int time = 0;
 
+    if (platform == x86)
+    {
+        // x86 requires sudo mode unlike the RPI mode
+        if (getuid())
+        {
+            printf("x86 mode needs sudo privileges\n");
+            return 0;
+        }
+    }
+
     if (mode == Terminal)
     {
         switch (platform)
         {
-            case RP5:
+            case RPI:
                 RP5_TerminalMode();
                 break;
             
@@ -52,7 +63,7 @@ int main(int argc, char** argv)
 
         switch (platform)
         {
-            case RP5:
+            case RPI:
                 RP5_DaemonMode(filename, time);
                 break;
             
