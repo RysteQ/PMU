@@ -33,7 +33,7 @@ bool ValidateArguments(int argc, char** argv)
             return false;
         }
 
-        if (strcmp(argv[2], "-rp5") != 0 && strcmp(argv[2], "-x86") != 0)
+        if (strcmp(argv[2], "-rpi") != 0 && strcmp(argv[2], "-x86") != 0)
         {
             return false;
         }
