@@ -26,4 +26,4 @@ The file output will contain the time the measurement was taken at and and depen
 
 ---
 
-Version: 1
+Version: 2

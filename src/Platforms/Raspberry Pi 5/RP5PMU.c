@@ -104,7 +104,7 @@ void RP5_TerminalMode() {
     while (1)
     {
         RP5_gencmd(gencmd_result);
-        printf("%f W\n", RP5_GetVoltage(gencmd_result) * RP5_GetAmpers(gencmd_result));
+        printf("%lf W\n", RP5_GetVoltage(gencmd_result) * RP5_GetAmpers(gencmd_result));
         sleep(1);
     }
 }
@@ -135,7 +135,7 @@ void RP5_DaemonMode(const char* filename, int minutes_to_run) {
         for (int i = 0; i < 60; i++)
         {
             RP5_gencmd(gencmd_result);
-            fprintf(output_file, "%i %f W\n", time(NULL), RP5_GetVoltage(gencmd_result), RP5_GetAmpers(gencmd_result));
+            fprintf(output_file, "%i %lf W\n", time(NULL), RP5_GetVoltage(gencmd_result), RP5_GetAmpers(gencmd_result));
             sleep(1);
         }
 
